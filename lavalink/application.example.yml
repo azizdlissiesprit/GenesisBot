@@ -1,0 +1,64 @@
+# Example Lavalink config for GenesisBot.
+# Copy this into your Lavalink folder as `application.yml` (next to Lavalink.jar).
+# SoundCloud works out of the box — no credentials required.
+
+server:
+  port: 2333
+  address: 127.0.0.1
+
+lavalink:
+  plugins:
+    # Used only to resolve a YouTube link's title (the bot then plays the SoundCloud match,
+    # because YouTube's signature cipher is currently broken in this plugin version).
+    - dependency: "dev.lavalink.youtube:youtube-plugin:1.18.1"
+      snapshot: false
+  pluginsDir: "./plugins"
+
+  server:
+    password: "youshallnotpass"
+    sources:
+      youtube: false        # default YouTube source off; the plugin above handles YouTube
+      bandcamp: true
+      soundcloud: true       # primary source the bot plays from
+      twitch: true
+      vimeo: true
+      http: true
+      local: false
+
+    bufferDurationMs: 400
+    frameBufferDurationMs: 5000
+    youtubePlaylistLoadLimit: 6
+    playerUpdateInterval: 5
+    youtubeSearchEnabled: true
+    soundcloudSearchEnabled: true
+    gc-warnings: true
+
+plugins:
+  youtube:
+    enabled: true
+    allowSearch: true
+    allowDirectVideoIds: true
+    allowDirectPlaylistIds: true
+    clients:
+      - MUSIC
+      - TV
+      - WEB
+    # OPTIONAL: authenticate with a *burner* Google account to improve YouTube access.
+    # On first start with enabled:true and no refreshToken, Lavalink prints a
+    # https://www.google.com/device code; after you approve it, it logs a refreshToken
+    # to paste below so it persists. Not required — playback uses SoundCloud.
+    oauth:
+      enabled: false
+      # refreshToken: "your-refresh-token-here"
+
+metrics:
+  prometheus:
+    enabled: false
+    endpoint: /metrics
+
+logging:
+  file:
+    path: ./logs/
+  level:
+    root: INFO
+    lavalink: INFO

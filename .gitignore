@@ -1,0 +1,24 @@
+# ---- Secrets (keep the real config out of git; commit config.example.json instead) ----
+GenesisBot/Config/config.json
+
+# ---- .NET build output ----
+bin/
+obj/
+*.user
+*.suo
+
+# ---- Visual Studio / Rider / VS Code ----
+.vs/
+.idea/
+.vscode/
+
+# ---- OS noise ----
+Thumbs.db
+.DS_Store
+
+# ---- Lavalink runtime artifacts (if you keep Lavalink inside the repo) ----
+lavalink/Lavalink.jar
+lavalink/plugins/
+lavalink/logs/
+# Your real Lavalink config may contain an OAuth refresh token — never commit it.
+lavalink/application.yml
